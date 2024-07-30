@@ -30,7 +30,7 @@ void connection_pool::init(std::string url, std::string User, std::string PassWo
 
     for(int i = 0; i < MaxConn; i++) 
     {
-        MYSQL *con = NULL;
+        MYSQL *con = nullptr;
         con = mysql_init(con);
 
         if(con == nullptr) {

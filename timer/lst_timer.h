@@ -38,7 +38,7 @@ class util_timer {
 public:
     util_timer():prev(nullptr), next(nullptr) {}
 
-private:
+
     time_t expire;  //超时时间
     //回调函数声明：声明一个返回值为空的函数指针cb_func,传入clent_data指针作为函数参数
     void (*cb_func) (client_data *);    //回调函数
@@ -51,7 +51,17 @@ private:
 
 class sort_timer_lst {
 private:
-    
+    util_timer *head;
+    util_timer *tail;
+    void add_timer(util_timer *timer, util_timer *lst_head);
+public:
+    sort_timer_lst() : head(nullptr), tail(nullptr){}
+    ~sort_timer_lst();
+
+    void add_timer(util_timer *timer);      //添加定时器，内部调用私有成员
+    void adjust_timer(util_timer *timer);   //调整定时器
+    void delete_timer(util_timer *timer);    //删除定时器
+    void tick();                            //处理定时任务
 };
 
 #endif
