@@ -64,4 +64,31 @@ public:
     void tick();                            //处理定时任务
 };
 
+
+class Utils {
+public:
+    static int *u_pipefd;
+    sort_timer_lst m_time_lst;
+    static int u_epollfd;
+    int m_TIMESLOT;
+public:
+    Utils() {}
+    ~Utils() {}
+
+    void init(int timeslot) ;
+
+    //设置文件描述符为非阻塞状态 
+    int setnonblocking(int fd);
+    //将内核事件表注册读事件，ET模式，选择开启EPOLLONESHOT
+    void addfd(int epollfd, int fd, bool one_shot, int TRGIMode) ;
+    //信号处理函数
+    static void sig_handler(int sig);
+    //设置信号处理函数
+    void addsig(int sig, void(handler)(int), bool restart = true);
+    //定时处理任务，重新定时以不断触发SIGALRM信号
+    void timer_handler();
+
+    void show_error(int connfd, const char *info);
+};
+
 #endif
