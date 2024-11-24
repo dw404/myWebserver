@@ -48,7 +48,7 @@ private:
 
 public:
     locker(){
-        if(pthread_mutex_init(&m_mutex, NULL) != 0) {
+        if(pthread_mutex_init(&m_mutex, nullptr) != 0) {
             throw std::exception();
         }
     }
@@ -79,7 +79,7 @@ private:
 
 public:
     cond() {
-        if(pthread_cond_init(&m_cond, NULL) != 0) {
+        if(pthread_cond_init(&m_cond, nullptr) != 0) {
             throw std::exception();
         }
     }
